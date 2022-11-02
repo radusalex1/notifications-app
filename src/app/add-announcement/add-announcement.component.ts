@@ -18,7 +18,7 @@ export class AddAnnouncementComponent implements OnInit {
   }
 
   addNote():void{
-    
+    console.log("ADDED")
   }
 
 }
