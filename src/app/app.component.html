@@ -1,15 +1,1 @@
-<div class="app-container">
-  <div *ngFor="let announcement of announcements" class="announcements">
-    <div *ngIf="selectedCategory=='All';else applyFilter">
-      <app-announcement [announc]="announcement"></app-announcement>
-    </div>
-    <ng-template #applyFilter>
-      <div *ngIf="announcement.category==selectedCategory and selectedCategory!='All'">
-        <app-announcement [announc]="announcement"></app-announcement>
-      </div>
-    </ng-template>
-  </div>
-</div>
-<div>
-  <app-categories (selectedCategoryEmitter)="receiveCategory($event)"></app-categories>
-</div>
+<router-outlet></router-outlet>

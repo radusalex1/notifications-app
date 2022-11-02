@@ -7,6 +7,7 @@ import { Category } from '../category';
   templateUrl: './announcement.component.html',
   styleUrls: ['./announcement.component.scss']
 })
+
 export class AnnouncementComponent implements OnInit {
 
  @Input('announc') announcement:Announcement=

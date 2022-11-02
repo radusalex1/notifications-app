@@ -1,1 +1,41 @@
-<p>add-announcement works!</p>
+<div class="content">
+    <h1> Add a note </h1>
+    <form class="add-note-form">
+        <label>Title</label>
+
+        <div *ngIf="name.errors?.['required']" style="color:red;">Name is required.</div>
+        <div *ngIf="name.errors?.['minlength']" style="color:red;"> Name must be at least 4 characters long.</div>
+
+        <mat-form-field>
+            <input matInput name="inputNote" [(ngModel)]="newTitle" #name="ngModel" placeholder="Enter your title" required
+                minlength="4" />
+        </mat-form-field>
+
+        <br>
+        <label>Description</label>
+        <div *ngIf="describe.errors?.['required']" style="color:red;">
+            Description is required.
+        </div>
+        <div *ngIf="describe.errors?.['minlength']" style="color:red;">
+            Description must be at least 4 characters long.
+        </div>
+    </form>
+ <mat-form-field class="add-note-form">
+        <textarea matInput name="inputNote" [(ngModel)]="newDescription" placeholder="Enter your description"
+            #describe="ngModel" required minlength="4"></textarea>
+    </mat-form-field>
+
+    <br>
+    <mat-form-field class="add-note-form" appearance="fill">
+        <mat-label>Choose an option</mat-label>
+        <mat-select matNativeControl #choose="ngModel" [(ngModel)]="newCategory" style="width: 180px; font-size: 16px;" required>
+            <mat-option *ngFor="let category of categories"  [value]=category> {{category}}</mat-option>
+        </mat-select>
+        <mat-error *ngIf="choose.errors?.['required']">Please choose an option.</mat-error>
+    </mat-form-field>
+    
+    <br>
+    <button routerLink=""  mat-raised-button color="primary">Cancel</button>
+    <button (click)="addNote()" mat-raised-button color="primary">Add</button>
+</div>
+

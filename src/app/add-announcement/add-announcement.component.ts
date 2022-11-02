@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Category } from '../category';
 
 @Component({
   selector: 'app-add-announcement',
@@ -7,9 +8,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AddAnnouncementComponent implements OnInit {
 
+  categories:Category[]=Object.values(Category);
+  newCategory:Category=Category.Course;
+  newDescription:string="";
+  newTitle:string="";
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  addNote():void{
+    
   }
 
 }
