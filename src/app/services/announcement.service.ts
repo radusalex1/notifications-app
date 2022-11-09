@@ -1,4 +1,6 @@
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { Announcement } from '../announcement';
 import { Category } from '../category';
 
@@ -6,6 +8,8 @@ import { Category } from '../category';
   providedIn: 'root'
 })
 export class AnnouncementService {
+
+  baseUrl:string='https://newsapi20221108120432.azurewebsites.net';
 
   announcements: Announcement[] = [
     {
@@ -41,17 +45,38 @@ export class AnnouncementService {
       imageUrl:'imageUrl',
     },
   ];
-  serviceCall() {
-    console.log("Service was called");
-   }
+  constructor(private http:HttpClient) { 
 
-  constructor() { }
+  }
 
-  getAnnouncements():Announcement[]{
-      return this.announcements;
+  readonly httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type':  'application/json',
+    })
+  };
+
+
+  getAnnouncements():Observable<Announcement[]>{
+    var result;
+    result =  this.http.get<Announcement[]>(this.baseUrl + "/api/Announcements",this.httpOptions);
+    return result;
   }
 
   addAnnoucement(announcement:Announcement):void{
     this.announcements.push(announcement)
+  }
+
+  getNextId():string{
+    return this.announcements.length.toString();
+  }
+
+  deleteAnnouncement(Id:string):void{
+
+    console.log("aici se sterge un anunt cu id-ul ",Id);
+
+    this.http.delete(this.baseUrl + "/api/Announcements/{" + Id+"}",this.httpOptions)
+    .subscribe(
+      ()=>console.log("done")
+    )
   }
 }
