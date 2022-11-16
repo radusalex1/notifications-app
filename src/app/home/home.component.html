@@ -3,6 +3,7 @@
       <div *ngIf="selectedCategory=='All';else applyFilter">
         <app-announcement [announc]="announcement"></app-announcement>
         <button (click)="deleteAnnoucement(announcement.id)">Sterge Anuntul de mai sus</button>
+        <button [routerLink]="['/edit', announcement.id]" mat-raised-button color="primary">Edit announcement</button>
       </div>
       <ng-template #applyFilter>
         <div *ngIf="announcement.category==selectedCategory and selectedCategory!='All'">

@@ -11,9 +11,7 @@ export class AnnouncementService {
 
   baseUrl:string='https://newsapi20221108120432.azurewebsites.net';
 
-  constructor(private http:HttpClient) {
-
-  }
+  constructor(private http:HttpClient) { }
 
   readonly httpOptions = {
     headers: new HttpHeaders({
@@ -21,6 +19,10 @@ export class AnnouncementService {
     })
   };
 
+  getAnnouncementById(id:string):Observable<Announcement>{
+    debugger;
+    return this.http.get<Announcement>(this.baseUrl + "/api/Announcements/"+id,this.httpOptions)
+  }
 
   getAnnouncements():Observable<Announcement[]>{
     return this.http.get<Announcement[]>(this.baseUrl + "/api/Announcements",this.httpOptions);

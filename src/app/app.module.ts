@@ -20,6 +20,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { CommonModule } from '@angular/common';
 import { ErrorStateMatcher, ShowOnDirtyErrorStateMatcher } from '@angular/material/core';
 import { HttpClientModule } from '@angular/common/http';
+import { EditAnnouncementComponent } from './edit-announcement/edit-announcement.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { HttpClientModule } from '@angular/common/http';
     AddAnnouncementComponent,
     CategoriesComponent,
     AuthorPipe,
-    HomeComponent
+    HomeComponent,
+    EditAnnouncementComponent
   ],
   imports: [
     AppRoutingModule,
