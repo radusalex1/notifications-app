@@ -21,15 +21,14 @@ export class HomeComponent {
     this.selectedCategory=category
     console.log("Selected category: ",this.selectedCategory)
   }
- 
+
   ngOnInit():void{
     this.announcementService.getAnnouncements().subscribe(data => {
       this.announcements = data;
-    })   
+    })
   }
 
   deleteAnnoucement(Id:string):void{
-    debugger;
-    this.announcementService.deleteAnnouncement(Id);
+    this.announcementService.deleteAnnouncement(Id).subscribe();
   }
 }
