@@ -6,7 +6,9 @@ import { HomeComponent } from './home/home.component';
 
 const routes:Routes=[
   { path: 'add', component: AddAnnouncementComponent },
+  { path: 'home', component: HomeComponent, pathMatch:"full"},
   { path: '', component: HomeComponent, pathMatch:"full"},
+
 ]
 
 @NgModule({

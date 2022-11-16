@@ -1,41 +1,66 @@
 <div class="content">
-    <h1> Add a note </h1>
-    <form class="add-note-form">
-        <label>Title</label>
+    <h1> Add an announcement: </h1>
 
-        <div *ngIf="name.errors?.['required']" style="color:red;">Name is required.</div>
-        <div *ngIf="name.errors?.['minlength']" style="color:red;"> Name must be at least 4 characters long.</div>
+    <form class="form"> 
 
-        <mat-form-field>
-            <input matInput name="inputNote" [(ngModel)]="newTitle" #name="ngModel" placeholder="Enter your title" required
-                minlength="4" />
-        </mat-form-field>
+        <!-- Title -->
+        <mat-form-field>
+            <mat-label>Title</mat-label>
+            <input name="inputTitle" matInput [formControl]="titleFormControl" [(ngModel)]="newTitle"
+                placeholder="Enter your title" />
 
-        <br>
-        <label>Description</label>
-        <div *ngIf="describe.errors?.['required']" style="color:red;">
-            Description is required.
-        </div>
-        <div *ngIf="describe.errors?.['minlength']" style="color:red;">
-            Description must be at least 4 characters long.
-        </div>
-    </form>
- <mat-form-field class="add-note-form">
-        <textarea matInput name="inputNote" [(ngModel)]="newDescription" placeholder="Enter your description"
-            #describe="ngModel" required minlength="4"></textarea>
-    </mat-form-field>
+            <mat-error *ngIf="titleFormControl.hasError('required')">Title is required.</mat-error>
+            <mat-error *ngIf="titleFormControl.hasError('minlength')">Title needs to be minimum 4 characters.</mat-error>
+        </mat-form-field>
+        <br>
 
-    <br>
-    <mat-form-field class="add-note-form" appearance="fill">
-        <mat-label>Choose an option</mat-label>
-        <mat-select matNativeControl #choose="ngModel" [(ngModel)]="newCategory" style="width: 180px; font-size: 16px;" required>
-            <mat-option *ngFor="let category of categories"  [value]=category> {{category}}</mat-option>
-        </mat-select>
-        <mat-error *ngIf="choose.errors?.['required']">Please choose an option.</mat-error>
-    </mat-form-field>
-    
-    <br>
-    <button routerLink=""  mat-raised-button color="primary">Cancel</button>
-    <button (click)="addNote()" mat-raised-button color="primary">Add</button>
+        <!-- Author -->
+        <mat-form-field>
+            <mat-label>Author</mat-label>
+            <input name="inputAuthor" matInput [(ngModel)]="newAuthor" placeholder="Enter your author"
+                [formControl]="authorFormControl" />
+            <mat-error *ngIf="authorFormControl.hasError('required')">Author is required.</mat-error>
+            <mat-error *ngIf="authorFormControl.hasError('minlength')">Author needs to be minimum 4 characters.</mat-error>
+        </mat-form-field>
+        <br>
+
+        <!-- Message  -->
+        <mat-form-field>
+            <mat-label>Message</mat-label>
+            <input name="inputMessage" matInput [(ngModel)]="newMessage" placeholder="Enter your message"
+                [formControl]="messageFormControl" />
+
+            <mat-error *ngIf="messageFormControl.hasError('required')">Message is required.</mat-error>
+            <mat-error *ngIf="messageFormControl.hasError('minlength')">Message needs to be minimum 4 characters.</mat-error>
+        </mat-form-field>
+        <br>
+
+        <!-- ImageURL -->
+        <mat-form-field>
+            <mat-label>ImageURL</mat-label>
+            <input name="inputImageURL" matInput [(ngModel)]="imageURLFormControl" placeholder="Enter your imageURL"
+                [formControl]="imageURLFormControl" />
+
+            <mat-error *ngIf="imageURLFormControl.hasError('required')">ImageURL is required.</mat-error>
+            <mat-error *ngIf="imageURLFormControl.hasError('minlength')">ImageURL needs to be minimum 4 characters.</mat-error>
+        </mat-form-field>
+        <br>
+
+        <!-- Category --> 
+        <mat-form-field>
+            <mat-label>Choose </mat-label>
+            <mat-select matNativeControl [formControl]="categoryFormControl" [(ngModel)]="newCategory"
+                style="width: 180px; font-size: 16px;">
+                <mat-option *ngFor="let category of categories" [value]=category> {{category}} </mat-option>
+            </mat-select>
+             <mat-error *ngIf="categoryFormControl.hasError('required')">Please choose an option.</mat-error> 
+        </mat-form-field>
+
+    </form>
+    <br>
+
+    <div class="button">
+        <button routerLink="" mat-raised-button color="primary">Cancel</button>
+        <button routerLink="" (click)="addAnnouncement()" mat-raised-button color="primary">Add</button>
+    </div>
 </div>
-

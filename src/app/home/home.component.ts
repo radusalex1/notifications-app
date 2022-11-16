@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Announcement } from '../announcement';
-import { Category } from '../category';
 import { AnnouncementService } from '../services/announcement.service';
 
 @Component({
@@ -24,7 +23,13 @@ export class HomeComponent {
   }
  
   ngOnInit():void{
-    this.announcementService.serviceCall();
-    this.announcements=this.announcementService.getAnnouncements();
+    this.announcementService.getAnnouncements().subscribe(data => {
+      this.announcements = data;
+    })   
+  }
+
+  deleteAnnoucement(Id:string):void{
+    debugger;
+    this.announcementService.deleteAnnouncement(Id);
   }
 }
