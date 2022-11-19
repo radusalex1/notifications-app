@@ -7,6 +7,7 @@ import { AnnouncementService } from '../services/announcement.service';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
+
 export class HomeComponent {
   title = 'notifications-app';
 
@@ -28,7 +29,5 @@ export class HomeComponent {
     })
   }
 
-  deleteAnnoucement(Id:string):void{
-    this.announcementService.deleteAnnouncement(Id).subscribe();
-  }
+
 }

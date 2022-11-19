@@ -2,4 +2,13 @@
   <span class="title">{{announcement.title}}</span>
   <p class="message">{{announcement.message}}</p>
   <span class="author">{{announcement.author}}</span>
+
+  <button [routerLink]="['/edit', announcement.id]" mat-icon-button color="primary" routerLink="edit-note" class="edit-button">
+    <mat-icon>edit</mat-icon>
+  </button>
+
+  <button mat-icon-button class="delete-button" (click)="deleteAnnouncement(announcement.id)" >
+    <mat-icon>delete</mat-icon>
+  </button>
+
 </div>

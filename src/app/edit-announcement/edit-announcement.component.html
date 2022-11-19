@@ -1,6 +1,6 @@
 <div class="content">
     <h1> Edit an announcement: </h1>
-    <form class="form"> 
+    <form class="form">
         <!-- Title -->
         <mat-form-field>
             <mat-label>Title</mat-label>
@@ -42,20 +42,20 @@
         </mat-form-field>
         <br>
 
-        <!-- Category --> 
+        <!-- Category -->
         <mat-form-field>
             <mat-label>Choose </mat-label>
             <mat-select matNativeControl [formControl]="categoryFormControl" [(ngModel)]="newCategory"
                 style="width: 180px; font-size: 16px;">
                 <mat-option *ngFor="let category of categories" [value]=category> {{category}} </mat-option>
             </mat-select>
-             <mat-error *ngIf="categoryFormControl.hasError('required')">Please choose an option.</mat-error> 
+             <mat-error *ngIf="categoryFormControl.hasError('required')">Please choose an option.</mat-error>
         </mat-form-field>
     </form>
     <br>
 
     <div class="button">
         <button routerLink="" mat-raised-button color="primary">Cancel</button>
-        <!-- <button routerLink="" (click)="addAnnouncement()" mat-raised-button color="primary">Add</button> -->
+        <button routerLink="" (click)="saveNote()" mat-raised-button color="primary">Save</button>
     </div>
 </div>

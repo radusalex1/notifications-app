@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Announcement } from '../announcement';
 import { Category } from '../category';
+import { AnnouncementService } from '../services/announcement.service';
 
 @Component({
   selector: 'app-announcement',
@@ -11,12 +12,21 @@ import { Category } from '../category';
 export class AnnouncementComponent implements OnInit {
 
  @Input('announc') announcement:Announcement=
- {id:"",author:"",message:"", title:"", category:Category.General,
-  imageUrl:""};
+ {
+    id:"",
+    author:"",
+    message:"",
+    title:"",
+    category:Category.General,
+    imageUrl:""
+  };
 
-  constructor() { }
+  constructor(private announcementService: AnnouncementService) { }
 
   ngOnInit(): void {
   }
 
+  deleteAnnouncement(Id: string) {
+    this.announcementService.deleteAnnouncement(Id).subscribe()
+  }
 }

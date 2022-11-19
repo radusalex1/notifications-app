@@ -1,7 +1,7 @@
+import { Announcement } from './../announcement';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, Observable } from 'rxjs';
-import { Announcement } from '../announcement';
 import { Category } from '../category';
 
 @Injectable({
@@ -34,5 +34,9 @@ export class AnnouncementService {
 
   deleteAnnouncement(Id:string):Observable<unknown>{
     return this.http.delete(this.baseUrl + "/api/Announcements/{" + Id+"}",this.httpOptions)
+  }
+
+  updateAnnouncement(announcement:Announcement):Observable<unknown>{
+    return this.http.put(this.baseUrl + "/api/Announcements/{" +announcement.id +"}",announcement,this.httpOptions)
   }
 }
