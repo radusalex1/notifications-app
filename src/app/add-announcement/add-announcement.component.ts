@@ -3,6 +3,7 @@ import { FormControl, Validators } from '@angular/forms';
 import { Announcement } from '../announcement';
 import { Category } from '../category';
 import { AnnouncementService } from '../services/announcement.service';
+import { NotificationServiceService } from '../services/notification-service.service';
 
 @Component({
   selector: 'app-add-announcement',
@@ -25,7 +26,7 @@ export class AddAnnouncementComponent implements OnInit {
   newCategory:Category=Category.None;
   newImageUrl:string="";
 
-  constructor ( private announcementService: AnnouncementService ){
+  constructor ( private announcementService: AnnouncementService,private notificationService:NotificationServiceService){
   }
 
   ngOnInit(): void {
@@ -45,7 +46,11 @@ export class AddAnnouncementComponent implements OnInit {
       imageUrl:this.newImageUrl
     }
     this.announcementService.addAnnoucement(annouc)
-      .subscribe();
+      .subscribe(r=>
+        this.notificationService.sendMessage("BroadcastMessage", [r])
+      );
+
+
   }
 
 }
