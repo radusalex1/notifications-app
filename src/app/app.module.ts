@@ -21,6 +21,7 @@ import { CommonModule } from '@angular/common';
 import { ErrorStateMatcher, ShowOnDirtyErrorStateMatcher } from '@angular/material/core';
 import { HttpClientModule } from '@angular/common/http';
 import { EditAnnouncementComponent } from './edit-announcement/edit-announcement.component';
+import { NotificationServiceService } from './services/notification-service.service';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,7 @@ import { EditAnnouncementComponent } from './edit-announcement/edit-announcement
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [AnnouncementService],
+  providers: [AnnouncementService,NotificationServiceService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

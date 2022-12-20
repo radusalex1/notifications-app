@@ -2,6 +2,8 @@
   <span class="title">{{announcement.title}}</span>
   <p class="message">{{announcement.message}}</p>
   <span class="author">{{announcement.author}}</span>
+  <span class="author">{{announcement.category}}</span>
+
 
   <button [routerLink]="['/edit', announcement.id]" mat-icon-button color="primary" routerLink="edit-note" class="edit-button">
     <mat-icon>edit</mat-icon>

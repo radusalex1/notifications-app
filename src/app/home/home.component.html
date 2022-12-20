@@ -1,6 +1,7 @@
 <p>
   {{notificationMessage}}
 </p>
+
 <div class="app-container">
     <div *ngFor="let announcement of announcements" class="announcements">
       <div *ngIf="selectedCategory=='All';else applyFilter">

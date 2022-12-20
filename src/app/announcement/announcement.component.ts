@@ -13,13 +13,14 @@ export class AnnouncementComponent implements OnInit {
 
  @Input('announc') announcement:Announcement=
  {
-    id:"",
-    author:"",
-    message:"",
-    title:"",
-    category:Category.General,
-    imageUrl:""
-  };
+   id: "",
+   author: "",
+   message: "",
+   title: "",
+   category: Category.General,
+   imageUrl: "",
+   category_id: ''
+ };
 
   constructor(private announcementService: AnnouncementService) { }
 

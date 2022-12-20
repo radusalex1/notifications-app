@@ -12,14 +12,15 @@ import { NotificationServiceService } from '../services/notification-service.ser
 export class HomeComponent {
   title = 'notifications-app';
 
-  selectedCategory:string="All";
-  notificationMessage:string="asd";
+  selectedCategory:string;
+  notificationMessage:string;
 
   announcements: Announcement[]=[];
 
   constructor ( private announcementService: AnnouncementService,private notificationService:NotificationServiceService ){
 
   }
+  
   receiveCategory(category:string):void{
     this.selectedCategory=category
     console.log("Selected category: ",this.selectedCategory)

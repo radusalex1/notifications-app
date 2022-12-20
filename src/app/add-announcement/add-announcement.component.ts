@@ -33,24 +33,22 @@ export class AddAnnouncementComponent implements OnInit {
   }
 
   addAnnouncement():void{
+    debugger;
     console.log("ADDED")
 
     debugger;
     const annouc:Announcement={
-
-      id:"-1",
+      id: "-1",
       message: this.newMessage,
       title: this.newAuthor,
-      author:this.newAuthor,
-      category:this.newCategory,
-      imageUrl:this.newImageUrl
+      author: this.newAuthor,
+      category: this.newCategory,
+      imageUrl: this.newImageUrl,
+      category_id: ''
     }
-    this.announcementService.addAnnoucement(annouc)
-      .subscribe(r=>
+
+    this.announcementService.addAnnoucement(annouc).subscribe(r =>
         this.notificationService.sendMessage("BroadcastMessage", [r])
       );
-
-
   }
-
 }

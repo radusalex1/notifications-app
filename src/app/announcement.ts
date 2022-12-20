@@ -6,5 +6,6 @@ export interface Announcement {
     title:string;
     author:string;
     category:Category;
+    category_id:string;
     imageUrl:string;
 }
