@@ -18,7 +18,6 @@ export class HomeComponent {
   announcements: Announcement[]=[];
 
   constructor ( private announcementService: AnnouncementService,private notificationService:NotificationServiceService ){
-
   }
   
   receiveCategory(category:string):void{
@@ -27,12 +26,15 @@ export class HomeComponent {
   }
 
   ngOnInit():void{
+
+    debugger;
+    this.notificationService.initWebSocket();
+
+    this.notificationService.notificationSubject.subscribe(hasNotifications => this.notificationMessage = hasNotifications ? "New notifications, please refresh the page" : "");
+
     this.announcementService.getAnnouncements().subscribe(data => {
       this.announcements = data;
     })
-    this.notificationService.initWebSocket();
-    this.notificationService.notificationSubject.subscribe(hasNotifications => this.notificationMessage = hasNotifications ? "New notifications, please refresh the page" : "");
+    
   }
-
-
 }

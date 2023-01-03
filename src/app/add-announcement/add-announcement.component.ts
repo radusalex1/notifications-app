@@ -38,17 +38,16 @@ export class AddAnnouncementComponent implements OnInit {
 
     debugger;
     const annouc:Announcement={
-      id: "-1",
+      id:"",
       message: this.newMessage,
       title: this.newAuthor,
       author: this.newAuthor,
       category: this.newCategory,
       imageUrl: this.newImageUrl,
-      category_id: ''
+      category_id: '',
+      description:''
     }
 
-    this.announcementService.addAnnoucement(annouc).subscribe(r =>
-        this.notificationService.sendMessage("BroadcastMessage", [r])
-      );
+    this.announcementService.addAnnoucement(annouc).subscribe();
   }
 }

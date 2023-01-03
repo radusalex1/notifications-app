@@ -8,4 +8,5 @@ export interface Announcement {
     category:Category;
     category_id:string;
     imageUrl:string;
+    description:string;
 }
