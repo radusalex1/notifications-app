@@ -48,6 +48,8 @@ export class AddAnnouncementComponent implements OnInit {
       description:''
     }
 
-    this.announcementService.addAnnoucement(annouc).subscribe();
+    this.announcementService.addAnnouncement(annouc).subscribe(r => 
+        this.notificationService.sendMessage("BroadcastMessage", [r])
+      );
   }
 }

@@ -9,39 +9,42 @@ import { Category } from '../category';
 })
 export class AnnouncementService {
 
-  baseUrl:string='https://newsapi20221108120432.azurewebsites.net';
+  //baseUrl:string='https://newsapi20221108120432.azurewebsites.net';
 
-  getAllUrl:string="https://localhost:44305/api/Announcement/GetAll"
-  getByIdUrl:string="https://localhost:44305/api/Announcement/";
-  addAnnouncUrl:string="https://localhost:44305/api/Announcement/CreateAnnouncement";
-  constructor(private http:HttpClient) { }
+  // getAllUrl:string="https://localhost:44305/api/Announcement"
+  // getByIdUrl:string="https://localhost:44305/api/Announcement/";
+  // addAnnouncUrl:string="https://localhost:44305/api/Announcement";
+
+  baseUrl:string="https://localhost:44305"
+  
+  constructor(private httpClient: HttpClient) { }
 
   readonly httpOptions = {
     headers: new HttpHeaders({
-      'Content-Type':  'application/json',
+    'Content-Type': 'application/json',
     })
   };
 
   getAnnouncementById(id:string):Observable<Announcement>{
     debugger;
-    return this.http.get<Announcement>(this.getByIdUrl+id,this.httpOptions)
+    return this.httpClient.get<Announcement>(this.baseUrl +"/Announcement/"+id,this.httpOptions);
   }
 
   getAnnouncements():Observable<Announcement[]>{
-    return this.http.get<Announcement[]>(this.getAllUrl,this.httpOptions);
+    return this.httpClient.get<Announcement[]>(this.baseUrl+"/Announcement",this.httpOptions);
   }
 
-  addAnnoucement(announcement:Announcement):Observable<Announcement>{
+  addAnnouncement(announcement:any)
+  {
     debugger;
-    var test = this.http.post<Announcement>(this.addAnnouncUrl,announcement,this.httpOptions);
-    return test;
+    return this.httpClient.post("https://localhost:44305/Announcement",announcement,this.httpOptions);
   }
 
   deleteAnnouncement(Id:string):Observable<unknown>{
-    return this.http.delete(this.baseUrl + "/api/Announcements/{"+Id+"}",this.httpOptions)
+    return this.httpClient.delete(this.baseUrl + "/api/Announcements/{"+Id+"}",this.httpOptions)
   }
 
   updateAnnouncement(announcement:Announcement):Observable<unknown>{
-    return this.http.put(this.baseUrl + "/api/Announcements/{" +announcement.id +"}",announcement,this.httpOptions)
+    return this.httpClient.put(this.baseUrl + "/api/Announcements/{" +announcement.id +"}",announcement,this.httpOptions)
   }
 }
