@@ -1,53 +1,51 @@
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
 
+import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { AnnouncementComponent } from './announcement/announcement.component';
-import { AddAnnouncementComponent } from './add-announcement/add-announcement.component';
+import { AnnouncmentComponent } from './announcment/announcment.component';
 import { CategoriesComponent } from './categories/categories.component';
-import { AuthorPipe } from './author.pipe';
-import { AppRoutingModule } from './app-routing.module';
+import {MatButtonModule} from '@angular/material/button';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+import {MatSelectModule} from '@angular/material/select';
+import { AuthorPipePipe } from './author-pipe.pipe';
+import { AddAnnouncementComponent } from './add-announcement/add-announcement.component';
+import { FormsModule } from '@angular/forms';
+import { CategoryShowPipe } from './category-show.pipe';
+import { NotFoundComponent } from './not-found/not-found.component';
 import { HomeComponent } from './home/home.component';
-import { NgModule } from '@angular/core';
-
-import { AnnouncementService } from './services/announcement.service';
-import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatInputModule } from '@angular/material/input';
-import { MatCardModule } from "@angular/material/card";
-import { MatSelectModule } from '@angular/material/select';
-import { CommonModule } from '@angular/common';
-import { ErrorStateMatcher, ShowOnDirtyErrorStateMatcher } from '@angular/material/core';
+import {MatCardModule} from '@angular/material/card';
+import {MatIconModule} from '@angular/material/icon';
 import { HttpClientModule } from '@angular/common/http';
-import { EditAnnouncementComponent } from './edit-announcement/edit-announcement.component';
-import { NotificationServiceService } from './services/notification-service.service';
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    AnnouncementComponent,
-    AddAnnouncementComponent,
+    AnnouncmentComponent,
     CategoriesComponent,
-    AuthorPipe,
-    HomeComponent,
-    EditAnnouncementComponent
+    AuthorPipePipe,
+    AddAnnouncementComponent,
+    CategoryShowPipe,
+    NotFoundComponent,
+    HomeComponent
   ],
   imports: [
+    BrowserModule,
+    HttpClientModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MatButtonModule,
-    MatIconModule,
+    MatButtonModule    ,
     FormsModule,
-    CommonModule,
-    MatSelectModule,
-    MatCardModule,
     MatFormFieldModule,
     MatInputModule,
-    ReactiveFormsModule,
-    HttpClientModule
+    MatSelectModule,
+    MatCardModule,
+    MatIconModule
   ],
-  providers: [AnnouncementService,NotificationServiceService],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

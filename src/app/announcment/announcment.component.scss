@@ -5,6 +5,7 @@
     align-items: center;
     gap:20px;
     height:300px;
+    width: 200px;
     border: 2px solid #FFCACA;
     border-radius: 25px;
     padding: 30px;
@@ -22,6 +23,13 @@
     .author {
       align-self: flex-start;
       font-weight: 600;
+    }
+    .iconsContainer{
+      display: flex-inline;
+      justify-content: space-around;
+    }
+    .icon{
+      margin-right: 120px;
     }
   }
   

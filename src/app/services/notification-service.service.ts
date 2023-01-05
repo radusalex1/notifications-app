@@ -18,7 +18,7 @@ public notificationSubject: BehaviorSubject<boolean>;
   initWebSocket() {
     this.connection = new HubConnectionBuilder()
     .configureLogging(signalR.LogLevel.Information)
-    .withUrl('https://localhost:44305/hub/notifications')
+    .withUrl('https://localhost:7072/hub/notifications')
     .build();
  
     this.connection.on('message_received', (body: any) => {

@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { Announcement } from '../announcement';
+import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Announcement } from '../Models/announcement';
+import { Category } from '../Models/category';
 import { AnnouncementService } from '../services/announcement.service';
 import { NotificationServiceService } from '../services/notification-service.service';
 
@@ -8,33 +9,41 @@ import { NotificationServiceService } from '../services/notification-service.ser
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-
-export class HomeComponent {
+export class HomeComponent implements OnInit, OnChanges {
   title = 'notifications-app';
+  announcements:Announcement[];
+  shownAnnouncements:Announcement[]=[];
+  selectedCategory:string ;
+  notificationMessage = "test";
+constructor(private announcementService:AnnouncementService, private notificationService:NotificationServiceService)
+{
 
-  selectedCategory:string;
-  notificationMessage:string;
+}
 
-  announcements: Announcement[]=[];
+  ngOnInit(): void {
+    this.notificationService.initWebSocket();
+    this.notificationService.notificationSubject.subscribe((hasNotifications: any) => this.notificationMessage = hasNotifications ? "New notifications, please refresh the page" : "");
 
-  constructor ( private announcementService: AnnouncementService,private notificationService:NotificationServiceService ){
+    this.announcementService.getAnnouncememnts().subscribe((values)=>this.shownAnnouncements=values);
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    this.announcementService.getAnnouncememnts().subscribe((values)=>this.shownAnnouncements=values);
   }
   
-  receiveCategory(category:string):void{
-    this.selectedCategory=category
-    console.log("Selected category: ",this.selectedCategory)
+
+  SelectCategory(category:string){
+    this.selectedCategory = category;
+    this.shownAnnouncements = this.announcements.filter(a => Category[a.category]==category)
   }
 
-  ngOnInit():void{
+  DetectChange(detect:string)
+  {
+    this.announcementService.getAnnouncememnts().subscribe((values)=>this.shownAnnouncements=values);
+  }
 
-    debugger;
-    this.notificationService.initWebSocket();
-
-    this.notificationService.notificationSubject.subscribe(hasNotifications => this.notificationMessage = hasNotifications ? "New notifications, please refresh the page" : "");
-
-    this.announcementService.getAnnouncements().subscribe(data => {
-      this.announcements = data;
-    })
-    
+  CreateAnnouncement(announcement:Announcement)
+  {
+    this.announcements.push(announcement);
   }
 }

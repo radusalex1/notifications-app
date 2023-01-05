@@ -1,0 +1,14 @@
+<mat-card class="announcement-container">
+    <img [src]="imageURL" alt="not found" width="80px">
+<p class="title">{{title}}</p>
+<p class="message">{{message}}</p>
+<div class="iconsContainer">
+    <button mat-icon-button aria-label="your label" class="icon">
+        <mat-icon  [routerLink]="['/add/',id]">edit</mat-icon>
+    </button>
+<button mat-icon-button aria-label="" (click)="DeleteAnnouncement(id)">
+    <mat-icon>delete</mat-icon>
+    </button>
+</div>
+<p class="author">{{author | authorPipe}} </p>
+</mat-card>

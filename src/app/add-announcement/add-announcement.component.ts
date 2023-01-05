@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
-import { Announcement } from '../announcement';
-import { Category } from '../category';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { switchMap } from 'rxjs';
+import { Announcement } from '../Models/announcement';
+import { Category } from '../Models/category';
 import { AnnouncementService } from '../services/announcement.service';
+import { CategoryService } from '../services/category.service';
 import { NotificationServiceService } from '../services/notification-service.service';
 
 @Component({
@@ -10,46 +12,60 @@ import { NotificationServiceService } from '../services/notification-service.ser
   templateUrl: './add-announcement.component.html',
   styleUrls: ['./add-announcement.component.scss']
 })
-
 export class AddAnnouncementComponent implements OnInit {
 
-  titleFormControl = new FormControl('', [Validators.required, Validators.minLength(4)]);
-  authorFormControl = new FormControl('', [Validators.required, Validators.minLength(4)]);
-  messageFormControl = new FormControl('', [Validators.required, Validators.minLength(4)]);
-  imageURLFormControl = new FormControl('', [Validators.required, Validators.minLength(4)]);
-  categoryFormControl = new FormControl('', [Validators.required])
+  constructor(private announcementService:AnnouncementService,
+    private notificationService:NotificationServiceService,
+    private route:ActivatedRoute,
+    private categoryService:CategoryService) { }
 
-  categories:Category[]=Object.values(Category);
-  newMessage:string="";
-  newTitle:string="";
-  newAuthor:string="";
-  newCategory:Category=Category.None;
-  newImageUrl:string="";
+  idRecived:string|null="";
+  title:string;
+  author:string;
+  imageURL:string = "assets/hedgehog.png";
+  message:string;
+  id:string;
+  categories:Category[] =this.categoryService.getCategories();
+  announcement:Announcement;
+  selectedCategory:Category= Category.All;
 
-  constructor ( private announcementService: AnnouncementService,private notificationService:NotificationServiceService){
-  }
+  @Output() newAnnouncement = new EventEmitter<Announcement>();
+  @Output() editChange = new EventEmitter<any>();
 
   ngOnInit(): void {
-  }
-
-  addAnnouncement():void{
-    debugger;
-    console.log("ADDED")
-
-    debugger;
-    const annouc:Announcement={
-      id:"",
-      message: this.newMessage,
-      title: this.newAuthor,
-      author: this.newAuthor,
-      category: this.newCategory,
-      imageUrl: this.newImageUrl,
-      category_id: '',
-      description:''
+     this.idRecived = this.route.snapshot.paramMap.get('id');
+    if(this.idRecived!=null)
+    {
+      this.announcementService.getAnnouncementWithId(this.idRecived).subscribe(value=>{
+        this.title = value.title;
+        this.id=value.id;
+      this.message=value.message;
+      this.selectedCategory=value.category;
+      this.author=value.author;
+      });
+      
     }
-
-    this.announcementService.addAnnouncement(annouc).subscribe(r => 
-        this.notificationService.sendMessage("BroadcastMessage", [r])
-      );
   }
+
+  addAnnouncement(){
+    let announcement =  {
+      author:this.author,
+      title:this.title,
+      id:this.id,
+      imageURL:this.imageURL,
+      category:Category[Category.All],
+      message:"test"
+    }
+    if(this.idRecived!=null)
+    {
+      this.announcementService.editAnnouncementWithId(this.idRecived,announcement).subscribe();
+    }
+    else
+    {
+          
+    this.announcementService.addAnnouncement(announcement).subscribe(r => this.notificationService.sendMessage("BroadcastMessage", [r]));
+    }
+    this.editChange.emit("");
+  }
+
 }

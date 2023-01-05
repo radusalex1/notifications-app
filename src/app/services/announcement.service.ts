@@ -1,50 +1,49 @@
-import { Announcement } from './../announcement';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpClientModule, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, Observable } from 'rxjs';
-import { Category } from '../category';
+import { Observable, of } from 'rxjs';
+import { Announcement } from '../Models/announcement';
+import { Category } from '../Models/category';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AnnouncementService {
-
-  //baseUrl:string='https://newsapi20221108120432.azurewebsites.net';
-
-  // getAllUrl:string="https://localhost:44305/api/Announcement"
-  // getByIdUrl:string="https://localhost:44305/api/Announcement/";
-  // addAnnouncUrl:string="https://localhost:44305/api/Announcement";
-
-  baseUrl:string="https://localhost:44305"
-  
-  constructor(private httpClient: HttpClient) { }
-
+  baseURL="https://localhost:44305";
   readonly httpOptions = {
     headers: new HttpHeaders({
     'Content-Type': 'application/json',
     })
   };
+  
+  constructor(private httpClient: HttpClient) { }
 
-  getAnnouncementById(id:string):Observable<Announcement>{
-    debugger;
-    return this.httpClient.get<Announcement>(this.baseUrl +"/Announcement/"+id,this.httpOptions);
-  }
+  serviceCall() {
+    console.log("Service was called");
+    }
 
-  getAnnouncements():Observable<Announcement[]>{
-    return this.httpClient.get<Announcement[]>(this.baseUrl+"/Announcement",this.httpOptions);
-  }
+    getAnnouncememnts():Observable<Announcement[]>
+    {
+      return this.httpClient.get<any[]>(this.baseURL +"/Announcement",this.httpOptions);
+    }
 
-  addAnnouncement(announcement:any)
-  {
-    debugger;
-    return this.httpClient.post("https://localhost:44305/Announcement",announcement,this.httpOptions);
-  }
+    addAnnouncement(announcement:any)
+    {
+      return this.httpClient.post(this.baseURL+"/Announcement",announcement,this.httpOptions);
+    }
 
-  deleteAnnouncement(Id:string):Observable<unknown>{
-    return this.httpClient.delete(this.baseUrl + "/api/Announcements/{"+Id+"}",this.httpOptions)
-  }
+    getAnnouncementWithId(id:string)
+    {
+      return this.httpClient.get<Announcement>(this.baseURL +"/Announcement/"+id,this.httpOptions);
+    }
 
-  updateAnnouncement(announcement:Announcement):Observable<unknown>{
-    return this.httpClient.put(this.baseUrl + "/api/Announcements/{" +announcement.id +"}",announcement,this.httpOptions)
-  }
+    editAnnouncementWithId(id:string|null,newAnnouncement:any)
+    {
+      return this.httpClient.put(this.baseURL+"/Announcement/"+id,newAnnouncement,this.httpOptions);
+
+    }
+
+    deleteAnnouncementWithId(id:string|null)
+    {
+      return this.httpClient.delete(this.baseURL+"/Announcement/"+id,this.httpOptions);
+    }
 }

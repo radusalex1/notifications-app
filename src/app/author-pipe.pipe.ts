@@ -1,9 +1,9 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-  name: 'author'
+  name: 'authorPipe'
 })
-export class AuthorPipe implements PipeTransform {
+export class AuthorPipePipe implements PipeTransform {
 
   transform(value: string): string {
     return "By " + value;
