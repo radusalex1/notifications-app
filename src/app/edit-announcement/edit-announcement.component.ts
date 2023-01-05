@@ -61,8 +61,6 @@ export class EditAnnouncementComponent implements OnInit {
         author: this.newAuthor,
         imageUrl: this.newImageUrl,
         category: this.newCategory,
-        category_id: '',
-        description:''
       }
       this.announcementService.updateAnnouncement(anncounc).subscribe()
     }

@@ -18,9 +18,7 @@ export class AnnouncementComponent implements OnInit {
    message: "",
    title: "",
    category: Category.General,
-   imageUrl: "",
-   category_id: '',
-   description:''
+   imageUrl: ""
  };
 
   constructor(private announcementService: AnnouncementService) { }
