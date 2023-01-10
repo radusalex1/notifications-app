@@ -11,10 +11,6 @@ export class AnnouncementService {
 
   //baseUrl:string='https://newsapi20221108120432.azurewebsites.net';
 
-  // getAllUrl:string="https://localhost:44305/api/Announcement"
-  // getByIdUrl:string="https://localhost:44305/api/Announcement/";
-  // addAnnouncUrl:string="https://localhost:44305/api/Announcement";
-
   baseUrl:string="https://localhost:44305"
   
   constructor(private httpClient: HttpClient) { }
@@ -37,14 +33,14 @@ export class AnnouncementService {
   addAnnouncement(announcement:any)
   {
     debugger;
-    return this.httpClient.post("https://localhost:44305/Announcement",announcement,this.httpOptions);
+    return this.httpClient.post(this.baseUrl+"/Announcement",announcement,this.httpOptions);
   }
 
   deleteAnnouncement(Id:string):Observable<unknown>{
-    return this.httpClient.delete(this.baseUrl + "/api/Announcements/{"+Id+"}",this.httpOptions)
+    return this.httpClient.delete(this.baseUrl + "/Announcement/"+Id,this.httpOptions)
   }
 
   updateAnnouncement(announcement:Announcement):Observable<unknown>{
-    return this.httpClient.put(this.baseUrl + "/api/Announcements/{" +announcement.id +"}",announcement,this.httpOptions)
+    return this.httpClient.put(this.baseUrl + "/Announcement?id=" +announcement.id,announcement,this.httpOptions)
   }
 }

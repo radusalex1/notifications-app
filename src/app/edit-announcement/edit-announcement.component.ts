@@ -7,6 +7,7 @@ import { Subscription } from 'rxjs';
 import { AnnouncementComponent } from '../announcement/announcement.component';
 import { Category } from '../category';
 import { AnnouncementService } from '../services/announcement.service';
+import { NotificationServiceService } from '../services/notification-service.service';
 
 @Component({
   selector: 'app-edit-announcement',
@@ -32,7 +33,7 @@ export class EditAnnouncementComponent implements OnInit {
   newCategory: Category = Category.None;
   newImageUrl: string = "";
 
-  constructor(private route: ActivatedRoute, private announcementService: AnnouncementService) { }
+  constructor(private route: ActivatedRoute, private announcementService: AnnouncementService,private notificationService:NotificationServiceService) { }
 
   ngOnInit() {
 
@@ -62,7 +63,9 @@ export class EditAnnouncementComponent implements OnInit {
         imageUrl: this.newImageUrl,
         category: this.newCategory,
       }
-      this.announcementService.updateAnnouncement(anncounc).subscribe()
+
+      this.announcementService.updateAnnouncement(anncounc).subscribe(r=>
+        this.notificationService.sendMessage("BroadcastMessage", [r]))
     }
   }
 

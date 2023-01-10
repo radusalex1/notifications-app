@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Announcement } from '../announcement';
 import { Category } from '../category';
 import { AnnouncementService } from '../services/announcement.service';
+import { NotificationServiceService } from '../services/notification-service.service';
 
 @Component({
   selector: 'app-announcement',
@@ -21,12 +22,13 @@ export class AnnouncementComponent implements OnInit {
    imageUrl: ""
  };
 
-  constructor(private announcementService: AnnouncementService) { }
+  constructor(private announcementService: AnnouncementService,private notificationService:NotificationServiceService) { }
 
   ngOnInit(): void {
   }
 
   deleteAnnouncement(Id: string) {
-    this.announcementService.deleteAnnouncement(Id).subscribe()
+    this.announcementService.deleteAnnouncement(Id).subscribe(r=>
+      this.notificationService.sendMessage("BroadcastMessage", [r]))
   }
 }

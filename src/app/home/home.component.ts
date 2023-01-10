@@ -30,7 +30,7 @@ export class HomeComponent {
     debugger;
     this.notificationService.initWebSocket();
 
-    this.notificationService.notificationSubject.subscribe(hasNotifications => this.notificationMessage = hasNotifications ? "New notifications, please refresh the page" : "");
+    this.notificationService.notificationSubject.subscribe(hasNotifications => this.notificationMessage = hasNotifications ? "Notification list changed, please refresh" : "");
 
     this.announcementService.getAnnouncements().subscribe(data => {
       this.announcements = data;
