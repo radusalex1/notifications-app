@@ -18,6 +18,8 @@ export class AnnouncementService {
   readonly httpOptions = {
     headers: new HttpHeaders({
     'Content-Type': 'application/json',
+    'Response-Type':"text",
+ 
     })
   };
 
