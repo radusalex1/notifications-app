@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@angular/core';
 import { Announcement } from '../announcement';
 import { Category } from '../category';
 import { AnnouncementService } from '../services/announcement.service';
@@ -22,13 +22,19 @@ export class AnnouncementComponent implements OnInit {
    imageUrl: ""
  };
 
+  @Output()
+  changedDetected:any = new EventEmitter<any>();
+
   constructor(private announcementService: AnnouncementService,private notificationService:NotificationServiceService) { }
 
   ngOnInit(): void {
   }
 
   deleteAnnouncement(Id: string) {
+
     this.announcementService.deleteAnnouncement(Id).subscribe(r=>
       this.notificationService.sendMessage("BroadcastMessage", [r]))
+
+    this.changedDetected.emit("");
   }
 }

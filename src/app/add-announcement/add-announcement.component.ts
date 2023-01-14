@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { Announcement } from '../announcement';
 import { Category } from '../category';
@@ -26,6 +26,8 @@ export class AddAnnouncementComponent implements OnInit {
   newCategory:Category=Category.None;
   newImageUrl:string="";
 
+  @Output() newAnnouncement = new EventEmitter<any>();
+
   constructor ( private announcementService: AnnouncementService,private notificationService:NotificationServiceService){
   }
 
@@ -49,5 +51,6 @@ export class AddAnnouncementComponent implements OnInit {
     this.announcementService.addAnnouncement(annouc).subscribe(r => 
         this.notificationService.sendMessage("BroadcastMessage", [r])
       );
+    this.newAnnouncement.emit("")
   }
 }

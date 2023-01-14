@@ -23,3 +23,22 @@
    }
 
 }
+
+.form-class{
+    display: flex;
+    flex-direction:column;
+}
+
+.select{
+    margin: 20px;
+}
+
+.button{
+    margin: 20px;
+}
+
+.container{
+    display: flex;
+    margin-top: 100px;
+    justify-content: center;
+}

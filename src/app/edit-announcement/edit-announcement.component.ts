@@ -1,13 +1,11 @@
-import { Announcement } from './../announcement';
-import { HttpClient } from '@angular/common/http';
-import { Component, Input, OnInit } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
-import { Subscription } from 'rxjs';
-import { AnnouncementComponent } from '../announcement/announcement.component';
-import { Category } from '../category';
-import { AnnouncementService } from '../services/announcement.service';
-import { NotificationServiceService } from '../services/notification-service.service';
+import { Component, OnInit, Output, EventEmitter } from "@angular/core";
+import { FormControl, Validators } from "@angular/forms";
+import { ActivatedRoute } from "@angular/router";
+import { Announcement } from "../announcement";
+import { Category } from "../category";
+import { AnnouncementService } from "../services/announcement.service";
+import { NotificationServiceService } from "../services/notification-service.service";
+
 
 @Component({
   selector: 'app-edit-announcement',
@@ -32,6 +30,9 @@ export class EditAnnouncementComponent implements OnInit {
   newAuthor: string = "";
   newCategory: Category = Category.None;
   newImageUrl: string = "";
+
+  @Output() 
+  editChange = new EventEmitter<any>();
 
   constructor(private route: ActivatedRoute, private announcementService: AnnouncementService,private notificationService:NotificationServiceService) { }
 
@@ -67,6 +68,9 @@ export class EditAnnouncementComponent implements OnInit {
       this.announcementService.updateAnnouncement(anncounc).subscribe(r=>
         this.notificationService.sendMessage("BroadcastMessage", [r]))
     }
+    
+    this.editChange.emit("")
   }
+  
 
 }

@@ -1,16 +1,16 @@
-<div class="announcement-container">
-  <span class="title">{{announcement.title}}</span>
+<mat-card class="announcement-container">
+  <p class="title">{{announcement.title}}</p>
   <p class="message">{{announcement.message}}</p>
-  <span class="author">{{announcement.author}}</span>
-  <span class="author">{{announcement.category}}</span>
+  <p class="author">{{announcement.author}}</p>
 
-
-  <button [routerLink]="['/edit', announcement.id]" mat-icon-button color="primary" routerLink="edit-note" class="edit-button">
-    <mat-icon>edit</mat-icon>
-  </button>
-
+  <div class="iconsContainer">
+    <button [routerLink]="['/edit', announcement.id]" mat-icon-button color="primary" aria-label="your label" routerLink="edit-note" class="icon">
+      <mat-icon>edit</mat-icon>
+    </button>
+  </div>
+  
   <button routerLink="" mat-icon-button class="delete-button" (click)="deleteAnnouncement(announcement.id)" >
     <mat-icon>delete</mat-icon>
   </button>
 
-</div>
+</mat-card>
