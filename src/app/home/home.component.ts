@@ -23,6 +23,7 @@ export class HomeComponent {
   
   receiveCategory(category:string):void{
     this.selectedCategory=category
+    
     console.log("Selected category: ",this.selectedCategory)
   }
   
